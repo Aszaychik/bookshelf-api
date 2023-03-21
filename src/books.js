@@ -1,4 +1,4 @@
-const book1 = {
+export const books = {
   id: 'Qbax5Oy7L8WKf74l',
   name: 'Buku A',
   year: 2010,
@@ -12,7 +12,3 @@ const book1 = {
   insertedAt: '2021-03-04T09:11:44.598Z',
   updatedAt: '2021-03-04T09:11:44.598Z',
 };
-
-const books = [book1];
-
-export default books;

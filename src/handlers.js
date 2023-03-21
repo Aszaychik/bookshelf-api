@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-import books from './books.js';
+import { books } from './books.js';
 import { nanoid } from 'nanoid';
 import Joi from 'joi';
 
