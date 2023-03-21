@@ -1,21 +1,52 @@
 /* eslint-disable max-len */
 import { books } from './books.js';
+
+// nanoid for id generate
 import { nanoid } from 'nanoid';
+
+// Joi for schema validation
 import Joi from 'joi';
 
-export const getBooksHandler = () => {
-  const booksWithSelectedProperties = books.map(({ id, name, publisher }) => ({
+export const getBooksHandler = (request, h) => {
+  // Request query parameter
+  const { name, reading, finished } = request.query;
+
+  let filteredBooks = books;
+
+  // Query ?name (filter by name)
+  if (name) {
+    filteredBooks = filteredBooks.filter((book) =>
+      book.name.toLowerCase().includes(name.toLowerCase()),
+    );
+  }
+
+  // Query ?reading (filter by reading)
+  if (reading === '0') {
+    filteredBooks = filteredBooks.filter((book) => !book.reading);
+  } else if (reading === '1') {
+    filteredBooks = filteredBooks.filter((book) => book.reading);
+  }
+
+  // Query ?finished (filter by finished)
+  if (finished === '0') {
+    filteredBooks = filteredBooks.filter((book) => !book.finished);
+  } else if (finished === '1') {
+    filteredBooks = filteredBooks.filter((book) => book.finished);
+  }
+
+  // FIlter with selected properties (id, name, publisher)
+  const booksWithSelectedProperties = filteredBooks.map(({ id, name, publisher }) => ({
     id,
     name,
     publisher,
   }));
 
-  return {
+  return h.response({
     status: 'success',
     data: {
       books: booksWithSelectedProperties,
     },
-  };
+  }).code(200);
 };
 
 export const storeBookHandler = (request, h) => {
