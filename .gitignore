@@ -1,0 +1,61 @@
+# Compiled Object files, Static and Shared libraries (Xcode specific)
+*.o
+*.a
+*.framework/
+
+# Compiled Dynamic libraries (Windows/Linux specific)
+*.so
+*.dll
+*.dylib
+
+# Executables
+*.exe
+*.out
+*.app
+
+# Debug files
+*.dSYM/
+*.debug
+
+# Build/compile output
+build/
+bin/
+dist/
+target/
+
+# Package files
+*.zip
+*.tar
+*.gz
+*.tar.gz
+*.tgz
+
+# IDE files
+.vscode/
+.idea/
+*.iml
+
+# Dependency directories
+node_modules/
+vendor/
+.julia/
+R/library/
+packages/
+pip/
+venv/
+env/
+
+# Log files
+*.log
+
+# OS generated files
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Icon?
+ehthumbs_vista.db
+desktop.ini
+
+# Temporary files
+*.swp
+*~
