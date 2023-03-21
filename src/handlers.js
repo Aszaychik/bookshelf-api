@@ -84,8 +84,23 @@ export const addBookHandler = (request, h) => {
   }).code(201);
 };
 
-// export const getDetailBook = (request, h) => {
-//   const { bookId } = request.payload;
+export const getDetailBookHandler = (request, h) => {
+  const { id } = request.params;
 
-// }
+  const book = books.filter((n) => n.id === id)[0];
+
+  if (book !== undefined) {
+    return {
+      status: 'success',
+      data: {
+        book,
+      },
+    };
+  }
+
+  return h.response({
+    status: 'fail',
+    message: 'Buku tidak ditemukan',
+  }).code(400);
+};
 
