@@ -1,4 +1,4 @@
-import { getHandler } from './handlers.js';
+import { getHandler, addBookHandler } from './handlers.js';
 
 const routes = [
   {
@@ -6,11 +6,11 @@ const routes = [
     path: '/',
     handler: getHandler,
   },
-  //   {
-  //     method: 'POST',
-  //     path: '/',
-  //     handler: postHandler,
-  //   },
+  {
+    method: 'POST',
+    path: '/books',
+    handler: addBookHandler,
+  },
 ];
 
 export default routes;
