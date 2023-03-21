@@ -3,12 +3,20 @@ import { books } from './books.js';
 import { nanoid } from 'nanoid';
 import Joi from 'joi';
 
-export const getBooksHandler = () => ({
-  status: 'success',
-  data: {
-    books,
-  },
-});
+export const getBooksHandler = () => {
+  const booksWithSelectedProperties = books.map(({ id, name, publisher }) => ({
+    id,
+    name,
+    publisher,
+  }));
+
+  return {
+    status: 'success',
+    data: {
+      books: booksWithSelectedProperties,
+    },
+  };
+};
 
 export const storeBookHandler = (request, h) => {
   const {
@@ -101,7 +109,7 @@ export const getDetailBookHandler = (request, h) => {
   return h.response({
     status: 'fail',
     message: 'Buku tidak ditemukan',
-  }).code(400);
+  }).code(404);
 };
 
 export const updateBookByIdHandler = (request, h) => {
@@ -117,6 +125,7 @@ export const updateBookByIdHandler = (request, h) => {
     readPage,
     reading,
   } = request.payload;
+
 
   // Check if required field 'name' is present
   if (!name) {
@@ -154,10 +163,8 @@ export const updateBookByIdHandler = (request, h) => {
     }).code(400);
   }
 
-  const updatedAt = new Date().toISOString;
 
   const index = books.findIndex((book) => book.id === bookId);
-
   if (index !== -1) {
     books[index] = {
       ...books[index],
@@ -169,7 +176,7 @@ export const updateBookByIdHandler = (request, h) => {
       pageCount,
       readPage,
       reading,
-      updatedAt,
+      // updatedAt: new Date().toISOString,
     };
 
 
@@ -182,5 +189,23 @@ export const updateBookByIdHandler = (request, h) => {
   return h.response({
     status: 'fail',
     message: 'Gagal memperbarui buku. Id tidak ditemukan',
+  }).code(404);
+};
+
+export const deleteBookByIdHandler = (request, h) => {
+  const { bookId } = request.params;
+
+  const index = books.findIndex((book) => book.id === bookId);
+  if (index !== -1) {
+    books.splice(index, 1);
+    return h.response({
+      status: 'success',
+      message: 'Buku berhasil dihapus',
+    }).code(200);
+  }
+
+  return h.response({
+    status: 'fail',
+    message: 'Buku gagal dihapus. Id tidak ditemukan',
   }).code(404);
 };

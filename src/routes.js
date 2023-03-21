@@ -1,10 +1,10 @@
 /* eslint-disable max-len */
-import { getBooksHandler, storeBookHandler, getDetailBookHandler, updateBookByIdHandler } from './handlers.js';
+import { getBooksHandler, storeBookHandler, getDetailBookHandler, updateBookByIdHandler, deleteBookByIdHandler } from './handlers.js';
 
 const routes = [
   {
     method: 'GET',
-    path: '/',
+    path: '/books',
     handler: getBooksHandler,
   },
   {
@@ -21,6 +21,11 @@ const routes = [
     method: 'PUT',
     path: '/books/{bookId}',
     handler: updateBookByIdHandler,
+  },
+  {
+    method: 'DELETE',
+    path: '/books/{bookId}',
+    handler: deleteBookByIdHandler,
   },
 ];
 
