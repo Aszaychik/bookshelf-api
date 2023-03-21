@@ -1,10 +1,10 @@
-import { getHandler, addBookHandler } from './handlers.js';
+import { getBooksHandler, addBookHandler } from './handlers.js';
 
 const routes = [
   {
     method: 'GET',
     path: '/',
-    handler: getHandler,
+    handler: getBooksHandler,
   },
   {
     method: 'POST',

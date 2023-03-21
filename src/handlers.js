@@ -3,7 +3,7 @@ import { books } from './books.js';
 import { nanoid } from 'nanoid';
 import Joi from 'joi';
 
-export const getHandler = () => ({
+export const getBooksHandler = () => ({
   status: 'success',
   data: {
     books,
@@ -83,3 +83,9 @@ export const addBookHandler = (request, h) => {
     },
   }).code(201);
 };
+
+// export const getDetailBook = (request, h) => {
+//   const { bookId } = request.payload;
+
+// }
+
